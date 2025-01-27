@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis Matematika</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .game-container {
+            background-color: #ffffff;
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        input[type="number"] {
+            padding: 12px;
+            font-size: 1.2rem;
+            width: 180px;
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            outline: none;
+            transition: border 0.3s ease;
+        }
+
+        input[type="number"]:focus {
+            border-color: #2196F3;
+        }
+
+        button {
+            padding: 12px 18px;
+            font-size: 1.2rem;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            transform: scale(1.1);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #message {
+            margin-top: 20px;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        #next-btn {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Kuis Matematika</h1>
+        <p class="question" id="question"></p>
+        <input type="number" id="answer" placeholder="Your answer" />
+        <button id="submit-btn">Submit Answer</button>
+        <p id="message"></p>
+        <button id="next-btn" class="hidden">Next Question</button>
+    </div>
+
+    <script>
+        let currentQuestion = 0;
+        let score = 0;
+        let maxQuestions = 5;
+        let currentAnswer = 0;
+        const submitBtn = document.getElementById('submit-btn');
+        const answerInput = document.getElementById('answer');
+        const questionElement = document.getElementById('question');
+        const messageElement = document.getElementById('message');
+        const nextBtn = document.getElementById('next-btn');
+
+        const operations = ['+', '-', '*', '/'];
+
+        function generateQuestion() {
+            const num1 = Math.floor(Math.random() * 20) + 1;
+            const num2 = Math.floor(Math.random() * 20) + 1;
+            const operation = operations[Math.floor(Math.random() * operations.length)];
+            let question = `${num1} ${operation} ${num2}`;
+            let answer;
+
+            switch (operation) {
+                case '+':
+                    answer = num1 + num2;
+                    break;
+                case '-':
+                    answer = num1 - num2;
+                    break;
+                case '*':
+                    answer = num1 * num2;
+                    break;
+                case '/':
+                    answer = (num1 / num2).toFixed(2); // Dividing with two decimal points
+                    break;
+            }
+
+            currentAnswer = answer;
+            questionElement.textContent = question;
+        }
+
+        function checkAnswer() {
+            const userAnswer = parseFloat(answerInput.value);
+            if (Math.abs(userAnswer - currentAnswer) < 0.01) {
+                score++;
+                messageElement.textContent = 'Correct! Well done.';
+                messageElement.style.color = 'green';
+            } else {
+                messageElement.textContent = 'Incorrect. Try again!';
+                messageElement.style.color = 'red';
+            }
+            nextBtn.classList.remove('hidden');
+            submitBtn.disabled = true;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < maxQuestions) {
+                currentQuestion++;
+                answerInput.value = '';
+                messageElement.textContent = '';
+                submitBtn.disabled = false;
+                nextBtn.classList.add('hidden');
+                generateQuestion();
+            } else {
+                messageElement.textContent = `Game Over! Your score is ${score} out of ${maxQuestions}`;
+                messageElement.style.color = 'blue';
+                nextBtn.classList.add('hidden');
+                submitBtn.classList.add('hidden');
+            }
+        }
+
+        submitBtn.addEventListener('click', checkAnswer);
+        nextBtn.addEventListener('click', nextQuestion);
+
+        // Start the first question
+        generateQuestion();
+    </script>
+</body>
+</html>

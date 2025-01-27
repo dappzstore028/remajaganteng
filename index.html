@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remaja Hijrah</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Background animation */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, #ff7eb3, #ff758c, #ff9783);
+            background-size: 200% 200%;
+            z-index: -1;
+            animation: moveBackground 10s infinite alternate, gradientShift 8s infinite linear;
+        }
+
+        @keyframes moveBackground {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes gradientShift {
+            0% {
+                filter: hue-rotate(0deg);
+            }
+            100% {
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .welcome {
+            font-size: 1.2rem;
+            color: white;
+            margin: 15px 0 30px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            position: relative;
+            text-align: center;
+        }
+
+        .gallery img {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery-item span {
+            font-family: 'Arial', sans-serif;
+            display: block;
+            margin-top: 10px;
+            font-size: 1rem;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .gallery-item span:hover {
+            color: #ff7eb3;
+            transform: scale(1.1);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            pointer-events: none;
+            background: url('https://i.imgur.com/oWqUduy.gif'); /* Fire animation */
+            background-size: cover;
+            opacity: 0.6;
+            animation: fireEffect 1.5s infinite;
+        }
+
+        @keyframes fireEffect {
+            0% {
+                transform: scale(1) rotate(0deg);
+            }
+            50% {
+                transform: scale(1.1) rotate(5deg);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .admin {
+            width: 50%;
+            margin: 0 auto 20px auto;
+            border: 5px solid gold;
+        }
+
+        .group-photos {
+            margin-top: 40px;
+        }
+
+        .group-photos img {
+            width: 500px;
+            height: 500px;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 1rem;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: #333;
+            color: white;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 10px 20px;
+            background: #fff;
+            color: #ff6b81;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: #ff6b81;
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+    </style>
+</head>
+<body>
+    
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Explore Dunia Kami</h1>
+            <audio id="scrollSound" src="ssstik.io_1736583134290.mp3"></audio>
+            <button class="btn" onclick="playSoundAndScroll()">Gas Klik Ini Geng😎</button>
+        </div>
+    </div>
+    
+    <!-- Community Section -->
+    <div class="container" id="community">
+        <h1>Welcome to Remaja Hijrah</h1>
+        <div class="welcome">"Islam adalah agama yang mengajarkan kita untuk menjadi manusia yang lebih baik, bukan hanya untuk diri sendiri, tapi juga untuk orang lain." - Imam Al-Ghazali
+        </div>
+
+        <!-- Admin Photo -->
+        <div class="gallery-item">
+            <img src="dafa.jpg" alt="Admin" class="admin">
+            <span><a href="https://www.instagram.com/muhammaddafaariady?igsh=MXhnbjdsczNmcThhbg==">Dafa</a></span>
+        </div>
+
+        <div class="gallery">
+            <!-- Member Photos -->
+            <div class="gallery-item">
+                <img src="rahmad.jpg" alt="Member 1">
+                <span><a href="https://www.instagram.com/rahmad.fathi?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">Rahmad</a></span>
+            </div>
+            <div class="gallery-item">
+                <img src="rafif.jpg" alt="Member 2">
+                <span><a href="https://www.instagram.com/rafif_mahasin_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="">Rafif</a></span>
+            </div>
+            <div class="gallery-item">
+                <img src="apis.jpg" alt="Member 3">
+                <span><a href="https://www.instagram.com/mlna.collegeacc?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">Hafis</a></span>
+            </div>
+            <div class="gallery-item">
+                <img src="jeff.jpg" alt="Member 4">
+                <span><a href="https://www.instagram.com/m.fitrahramadhani?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">Fitrah</a></span>
+            </div>
+            <div class="gallery-item">
+                <img src="fadhil.jpg" alt="Member 5">
+                <span><a href="https://www.instagram.com/fadhil.1806/?utm_source=ig_web_button_share_sheet">Fadhil</a></span>
+            </div>
+            <div class="gallery-item">
+                <img src="fauzi.jpg" alt="Member 6">
+                <span><a href="https://www.instagram.com/fauzi_a__/?utm_source=ig_web_button_share_sheet">Fauzi</a></span>
+            </div>
+            <div class="gallery-item">
+                <img src="ihsan.jpg" alt="Member 7">
+                <span><a href="https://www.instagram.com/ihsanulhakima?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">Ihsan</a></span>
+            </div>
+            <div class="gallery-item">
+                <img src="alif.jpg" alt="Member 8">
+                <span><a href="https://www.instagram.com/aliefnugraha31?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">Alief</a></span>
+            </div>
+            <div class="gallery-item">
+                <img src="adli1.jpg" alt="Member 9">
+                <span><a href="https://www.instagram.com/m.adli_19?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">Adli</a></span>
+            </div>
+            <div class="gallery-item">
+                <img src="atha.jpg" alt="Member 10">
+                <span><a href="https://www.instagram.com/athashdq?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">Atha</a></span>
+            </div>
+            <div class="gallery-item">
+                <img src="adan.jpg" alt="Member 11">
+                <span><a href="https://www.instagram.com/fadhlanalfii?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">Fadhlan</a></span>
+            </div>
+            <div class="gallery-item">
+                <img src="rozik.jpg" alt="Member 12">
+                <span><a href="https://www.instagram.com/abduuuuul.ji/?utm_source=ig_web_button_share_sheet">Roziq</a></span>
+            </div>
+            <div class="gallery-item">
+                <img src="andi.jpg" alt="Member 13">
+                <span><a href="https://www.instagram.com/rrd7002?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">Andi</a></span>
+            </div>
+            <div class="gallery-item">
+                <img src="abyan.jpg" alt="Member 14">
+                <span><a href="https://www.instagram.com/toeanmoe_da?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">Abyan</a></span>
+            </div>
+            <div class="gallery-item">
+                <img src="irpan.jpg" alt="Member 15">
+                <span><a href="https://www.instagram.com/irfan.mgrbi?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">Irfan</a></span>
+            </div>
+            <div class="gallery-item">
+                <img src="sadiq.jpg" alt="Member 16">
+                <span><a href="https://www.instagram.com/irfansaddiiq?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">Saddiq</a></span>
+            </div>
+            <div class="gallery-item">
+                <img src="said.jpg" alt="Member 17">
+                <span><a href="https://www.instagram.com/saidirfan28?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">Said</a></span>
+            </div>
+            <div class="gallery-item">
+                <img src="burhani.jpg" alt="Member 18">
+                <span><a href="https://www.instagram.com/fauzi_a__/?utm_source=ig_web_button_share_sheet">Alif Fatahillah</a></span>
+            </div>
+        <div class="gallery-item">
+            <img src="mt.jpg" alt="Member 18">
+            <span><a href="https://www.instagram.com/freefirebgid?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">Rahmat</a></span>
+        </div>
+        <div class="gallery-item">
+            <img src="kucing.jpg" alt="Member 18">
+            <span><a href="game.html">MT</a></span>
+        </div>
+        <div class="gallery-item">
+            <img src="helm.jpg" alt="Member 18">
+            <span><a href="love.html">Helm</a></span>
+        </div>
+    </div>
+
+        <!-- Group Photos -->
+        <div class="group-photos">
+            <img src="1.jpg" alt="Group Photo 1">
+            <img src="2.jpg" alt="Group Photo 2">
+            <img src="3.jpg" alt="Group Photo 3">
+            <img src="4.jpg" alt="Group Photo 3">
+            <img src="5.jpg" alt="Group Photo 3">
+            <img src="6.jpg" alt="Group Photo 3">
+            <img src="8.jpg" alt="Group Photo 3">
+            <img src="9.jpg" alt="Group Photo 3">
+            <img src="10.jpg" alt="Group Photo 3">
+            <img src="11.jpg" alt="Group Photo 3">
+            <img src="12.jpg" alt="Group Photo 3">
+            <img src="13.jpg" alt="Group Photo 3">
+            
+        </div>
+
+        <div class="footer">&copy; Website by dafa dan sedikit bantuan AI🗿</div>
+    </div>
+<!-- <audio src="ssstik.io_1736583134290.mp3" controls autoplay></audio> -->
+    <script>
+         function playSoundAndScroll() {
+            const audio = document.getElementById("scrollSound");
+            audio.play();
+            audio.onended = () => {
+                document.getElementById("community").scrollIntoView({ behavior: "smooth" });
+            };
+        }
+        // JavaScript for interactive welcome message
+        document.addEventListener("DOMContentLoaded", () => {
+            const welcomeMessage = document.querySelector(".welcome");
+            const messages = [
+                "Setiap nama yang ditekan akan langsung mengarah ke Instagram,kecuali si HELM DAN si MT ",
+                "Selamat datang di komuitas kami",
+                
+            ];
+            let index = 0;
+
+            setInterval(() => {
+                welcomeMessage.textContent = messages[index];
+                index = (index + 1) % messages.length;
+            }, 4000);
+        });
+        // Scroll to community section when button is clicked
+        document.querySelector('.btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('community').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        
+
+        
+    </script>
+
+</body>
+</html>
